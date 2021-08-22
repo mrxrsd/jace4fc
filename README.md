@@ -1,13 +1,7 @@
-# Disclaimer:
+# Jace4fc
+Jace4fc is hard-fork of Jace.NET. Jace is a high performance calculation engine for the .NET platform. 
 
-This is my fork of Jace. It is basically the same as the original project but here we have decimal support and I've applied some bug fixes there are not in jace's main branch.
-
-Original Project: [Jace](https://github.com/pieterderycke/Jace)
-
----
-
-# Jace.NET
-Jace.NET is a high performance calculation engine for the .NET platform. It stands for "Just Another Calculation Engine".
+It stands for "Just Another Calculation Engine For Financial Calculations"
 
 
 ## What does it do?
@@ -67,3 +61,10 @@ double result = engine.Calculate("logn(var1,var2)+4", variables);
 For more information, you can read the following articles:
 * http://pieterderycke.wordpress.com/2012/11/04/jace-net-just-another-calculation-engine-for-net/
 * http://www.codeproject.com/Articles/682589/Jace-NET-Just-another-calculation-engine-for-NET
+
+
+# Disclaimer:
+
+This is my fork of Jace. It is basically the same as the original project but here we have decimal support and I've applied some bug fixes there are not in jace's main branch.
+
+Original Project: [Jace](https://github.com/pieterderycke/Jace)
