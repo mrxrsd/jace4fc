@@ -10,15 +10,15 @@ Jace.NET can interprete and execute strings containing mathematical formulas. Th
 Jace can execute formulas in two modes: in interpreted mode and in a dynamic compilation mode. If dynamic compilation mode is used, Jace will create a dynamic method at runtime and will generate the necessary MSIL opcodes for native execution of the formula. If a formula is re-executed with other variables, Jace will take the dynamically generated method from its cache. It is recommended to use Jace in dynamic compilation mode.
 
 ## Examples
-Jace.NET can be used in a couple of ways:
+Jace4fc can be used in a couple of ways:
 
 To directly execute a given mathematical formula using the provided variables:
 ```csharp
-Dictionary<string, double> variables = new Dictionary<string, double>();
-variables.Add("var1", 2.5);
-variables.Add("var2", 3.4);
+Dictionary<string, decimal> variables = new Dictionary<string, decimal>();
+variables.Add("var1", 2.5m);
+variables.Add("var2", 3.4m);
 
-var engine = CalculationEngine.New<double>();
+var engine = CalculationEngine.New<decimal>();
 double result = engine.Calculate("var1*var2", variables);
 ```
 
