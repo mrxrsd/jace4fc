@@ -1,20 +1,18 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Jace</id>
+    <id>Jace4fc</id>
     <version>$version$</version>
-    <title>Jace.NET</title>
-    <authors>Pieter De Rycke</authors>
+    <title>Jace4fc</title>
+    <authors>mrxrsd, Pieter De Rycke</authors>
     <license type="expression">MIT</license>
-    <projectUrl>https://github.com/pieterderycke/Jace</projectUrl>
+    <projectUrl>https://github.com/mrxrsd/jace4fce</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>
-		Jace.NET is a high performance calculation engine for the .NET platform that can dynamically parse, interprete and execute strings containing mathematical functions. Jace.NET is available for the various .NET flavors: .NET, .NET Core, WinRT, Xamarin.Android and Xamarin.IOS.
+		Jace4fc (Jace For Financial Calculations) is a high performance calculation engine for the .NET platform that can dynamically parse, interprete and execute strings containing mathematical functions. 
 	</description>
 	<summary>
-		Jace.NET is a high performance calculation engine for the .NET platform that can dynamically parse, interprete and execute strings containing mathematical functions. Jace.NET is available for the various .NET flavors: .NET, .NET Core, WinRT, Xamarin.Android and Xamarin.IOS.
-		
-		Jace can execute functions in two modes: in interpreted mode and in a dynamic compilation mode. If dynamic compilation mode is used, Jace will create a dynamic method at runtime and will generate the necessary MSIL opcodes for native execution of the function. If a function is re-executed with other variables, Jace will take the dynamically generated method from its cache. It is recommended to use Jace in dynamic compilation mode.
+		Jace4fc is hard-fork of Jace.NET. Jace4fc has decimal support needed for money and financial calculations.
 	</summary>
 	<tags>math interprete parse windows phone mathematical formula calculation expression parse evaluate</tags>
 	<dependencies>
