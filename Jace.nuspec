@@ -6,7 +6,7 @@
     <title>Jace4fc</title>
     <authors>mrxrsd, Pieter De Rycke</authors>
     <license type="expression">MIT</license>
-    <projectUrl>https://github.com/mrxrsd/jace4fce</projectUrl>
+    <projectUrl>https://github.com/mrxrsd/jace4fc</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>
 		Jace4fc (Jace For Financial Calculations) is a high performance calculation engine for the .NET platform that can dynamically parse, interprete and execute strings containing mathematical functions. 
