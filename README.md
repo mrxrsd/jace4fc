@@ -1,7 +1,7 @@
 # Jace4fc
-Jace4fc is hard-fork of Jace.NET. Jace is a high performance calculation engine for the .NET platform. 
+Jace4fc is hard-fork of Jace.NET. The major difference between them it is that here we hace decimal support.
 
-It stands for "Just Another Calculation Engine For Financial Calculations"
+Jace is a high performance calculation engine for the .NET platform. It stands for "Just Another Calculation Engine For Financial Calculations"
 
 
 ## What does it do?
