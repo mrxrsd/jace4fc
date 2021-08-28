@@ -57,6 +57,150 @@ var engine = CalculationEngine.New<double>()
 double result = engine.Calculate("logn(var1,var2)+4", variables);
 ```
 
+## Features
+
+### Basic Operations 
+
+The following mathematical operations are supported:
+* Addition: +
+* Subtraction: -
+* Multiplication: *
+* Division: /
+* Modulo: %
+* Exponentiation: ^
+
+### Boolean Operations
+
+The following boolean operations are supported:
+
+* Less than: <
+* Less than or equal: <=
+* More than: >
+* More than or equal: >=
+* Equal: ==
+* Not Equal: !=
+
+The boolean operations map true to 1.0 and false to 0.0. All functions accepting a condition will consider 0.0 as false and any other value as true.
+
+```csharp
+result = engine.Calculate("5 > 1")
+// 1.0
+```
+### Scientific Notation
+
+```csharp
+result = engine.Calculate("1E-3*5+2")
+// 2.005
+```
+
+### Variables
+
+```csharp
+
+var vars = new Dictionary<string, double>();
+variables.Add("a", 1.0);
+variables.Add("B", 2.0);
+variables.Add("c_c", 3.0);
+variables.Add("d1", 3.4);
+variables.Add("VaR_vAr", 10.0);
+
+
+result = engine.Calculate("a + B + c_c + d1 + 10 + VaR_vAr", vars)
+// 30.0
+```
+- Can contains letters ( a-z | A-Z ), underscore ( _ )  or a number ( 0-9 ).
+- Cannot start with a number.
+- Cannot start with underscore.
+
+### Standard Constants
+
+| Constant        |  Description | More Information |
+| ------------- | -------|----|
+| e |   Euler's number  | https://oeis.org/A001113 |
+| pi |   Pi| https://oeis.org/A000796 |
+
+```csharp
+result = engine.Calculate("2*pi")
+// 6.283185307179586
+```
+
+### Standard Functions
+
+The following mathematical functions are out of the box supported:
+
+| Function | Arguments       | Description         | More Information                                                                               |
+| -------- | --------------- | ------------------- | ---------------------------------------------------------------------------------------------- |
+| sin      | sin(x)          | Sine                | https://docs.microsoft.com/pt-br/dotnet/api/system.math.sin                                    |
+| cos      | cos(x)          | Cosine              | https://docs.microsoft.com/pt-br/dotnet/api/system.math.cos                                    |
+| asin     | asin(x)         | Arcsine             | https://docs.microsoft.com/pt-br/dotnet/api/system.math.asin                                   |
+| acos     | acos(x)         | Arccosine           | https://docs.microsoft.com/pt-br/dotnet/api/system.math.acos                                   |
+| tan      | tan(x)          | Tangent             | https://docs.microsoft.com/pt-br/dotnet/api/system.math.tan                                    |
+| atan     | atan(x)         | Arctangent          | https://docs.microsoft.com/pt-br/dotnet/api/system.math.atan                                   |
+| log      | log(x)          | Logarithm           | https://docs.microsoft.com/pt-br/dotnet/api/system.math.log                                    |
+| sqrt     | sqrt(x)         | Square Root         | https://docs.microsoft.com/pt-br/dotnet/api/system.math.sqrt                                   |
+| trunc    | trunc(x)        | Truncate            | https://docs.microsoft.com/pt-br/dotnet/api/system.math.trunc                                  |
+| floor    | floor(x)        | Floor               | https://docs.microsoft.com/pt-br/dotnet/api/system.math.floor                                  |
+| ceil     | ceil(x)         | Ceil                | https://docs.microsoft.com/pt-br/dotnet/api/system.math.ceil                                   |
+| round    | round(x \[,y\]) | Round               | Rounds a number to a specified number of digits where 'x' is the number and 'y' is the digits. |
+| random   | random(x)       | Random              | Generate a random double value between 0.0 and 1.0 where 'x' is the seed.                      |
+| if       | if(a,b,c)       | Excel's IF Function | IF 'a' IS true THEN 'b' ELSE 'c'.                                                              |
+| max      | max(x1,…,xn)    | Maximum             | Return the maximum number of a series.                                                         |
+| min      | min(x1,…,xn)    | Minimum             | Return the minimum number of a series.                                                         |
+
+
+```csharp
+
+// Sin (ordinary function)
+var vars = new Dictionary<string, double>();
+variables.Add("a", 2.0);
+
+ret = engine.Calculate("sin(100)+a", vars)
+// 1.4936343588902412
+
+
+// If
+var vars = new Dictionary<string, double>();
+variables.Add("a", 4.0);
+
+ifresult = engine.Calculate("if(2+2==a, 10, 5)", varsIf)
+// 10.0
+
+// MAX
+max = engine.Calculate("max(5,6,3,-4,5,3,7,8,13,100)")
+// 100.0
+
+```
+
+### Custom Functions 
+
+Custom functions allow programmers to add additional functions besides the ones already supported (sin, cos, asin, …). Functions are required to have a unique name. The existing functions cannot be overwritten.
+
+```csharp
+engine.AddFunction("addTwo", (Func<double, double>)((a) => a+2)):
+
+result  := engine.Calculate("addTwo(2.0)", nil)
+// 4.0
+
+```
+
+### Compile Time Constants
+
+Variables as defined in a formula can be replaced by a constant value at compile time. This feature is useful in case that a number of the parameters don't frequently change and that the formula needs to be executed many times. Thusfore it is better because constants could be optimizated on 'Optimization phase'.
+
+
+```csharp
+
+var consts  = new Dictionary<string, double>{{"b", 1.0}};
+var formula = engine.Build("a + b", consts); // It's the same as 'engine.Build("a+1")' but without dealing with string replace
+
+double result = formula(new Dictionary<string, double>{{"a", 3.0 }});
+// result will be 4.0
+```
+
+## Benchmark 
+
+TBD
+
 ## More Information
 For more information, you can read the following articles:
 * http://pieterderycke.wordpress.com/2012/11/04/jace-net-just-another-calculation-engine-for-net/
