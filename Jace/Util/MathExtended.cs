@@ -76,6 +76,21 @@ namespace Jace.Util
             var list = sequence.Select(getValue).ToList();
             var mid = (list.Count - 1) / 2;
             return list.NthOrderStatistic(mid);
+            
+        }
+
+        public static double Round(double value, double digits)
+        {
+            var pow = Math.Pow(10, digits);
+
+            return Math.Round(value * pow) / pow;
+        }
+
+        public static decimal Round(decimal value, decimal digits)
+        {
+            var pow = (decimal) Math.Pow(10, (double) digits);
+
+            return Math.Round(value * pow) / pow;
         }
     }
 }

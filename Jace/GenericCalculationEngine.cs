@@ -426,13 +426,19 @@ namespace Jace
             FunctionRegistry.RegisterFunction("ceiling", (Func<double, double>)Math.Ceiling, true, false);
             FunctionRegistry.RegisterFunction("floor", (Func<double, double>)Math.Floor, true, false);
             FunctionRegistry.RegisterFunction("truncate", (Func<double, double>)Math.Truncate, true, false);
-            FunctionRegistry.RegisterFunction("round", (Func<double, double>)Math.Round, true, false);
+            
 
             // Dynamic based arguments Functions
             FunctionRegistry.RegisterFunction("max", (DynamicFunc<double, double>)((a) => a.Max()), true, false);
             FunctionRegistry.RegisterFunction("min", (DynamicFunc<double, double>)((a) => a.Min()), true, false);
             FunctionRegistry.RegisterFunction("avg", (DynamicFunc<double, double>)((a) => a.Average()), true, false);
             FunctionRegistry.RegisterFunction("median", (DynamicFunc<double, double>)((a) => MathExtended.Median(a)), true, false);
+            FunctionRegistry.RegisterFunction("round", (DynamicFunc<double, double>)((a) =>
+            {
+                if (a.Length <= 1) return Math.Round(a[0]);
+
+                return MathExtended.Round(a[0], a[1]);
+            } ), true, false);
 
             // Non Idempotent Functions
             FunctionRegistry.RegisterFunction("random", (Func<double>) random.NextDouble, false, false);
@@ -495,13 +501,19 @@ namespace Jace
             FunctionRegistry.RegisterFunction("ceiling", (Func<decimal, decimal>)((a) => Math.Ceiling(a)), true, false);
             FunctionRegistry.RegisterFunction("floor", (Func<decimal, decimal>)((a) => Math.Floor(a)), true, false);
             FunctionRegistry.RegisterFunction("truncate", (Func<decimal, decimal>)((a) => Math.Truncate(a)), true, false);
-            FunctionRegistry.RegisterFunction("round", (Func<decimal, decimal>)Math.Round, true, false);
+            
 
             // Dynamic based arguments Functions
             FunctionRegistry.RegisterFunction("max", (DynamicFunc<decimal, decimal>)((a) => a.Max()), true, false);
             FunctionRegistry.RegisterFunction("min", (DynamicFunc<decimal, decimal>)((a) => a.Min()), true, false);
             FunctionRegistry.RegisterFunction("avg", (DynamicFunc<decimal, decimal>)((a) => a.Average()), true, false);
             FunctionRegistry.RegisterFunction("median", (DynamicFunc<decimal, decimal>)((a) => MathExtended.Median(a)), true, false);
+            FunctionRegistry.RegisterFunction("round", (DynamicFunc<decimal, decimal>)((a) =>
+            {
+                if (a.Length <= 1) return Math.Round(a[0]);
+
+                return MathExtended.Round(a[0], a[1]);
+            }), true, false);
 
             // Non Idempotent Functions
             FunctionRegistry.RegisterFunction("random", (Func<decimal>)(() => (decimal) random.NextDouble() ) , false, false);

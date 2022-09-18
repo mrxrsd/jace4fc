@@ -1364,5 +1364,37 @@ namespace Jace.Tests
             decimal result = engine.Calculate("$var1 + 2", variables);
             Assert.AreEqual(3m, result);
         }
+
+        [TestMethod]
+        public void TestRoundInterpreted()
+        {
+            var engine = CreateEngineHelper<decimal>(CultureInfo.InvariantCulture, ExecutionMode.Interpreted, true, false, true);
+            decimal result = engine.Calculate("round(1.234567,2)");
+            Assert.AreEqual(1.23m, result);
+        }
+
+        [TestMethod]
+        public void TestRoundCompiled()
+        {
+            var engine = CreateEngineHelper<decimal>(CultureInfo.InvariantCulture, ExecutionMode.Compiled, true, false, true);
+            decimal result = engine.Calculate("round(1.234567,2)");
+            Assert.AreEqual(1.23m, result);
+        }
+
+        [TestMethod]
+        public void TestRound1Interpreted()
+        {
+            var engine = CreateEngineHelper<decimal>(CultureInfo.InvariantCulture, ExecutionMode.Interpreted, true, false, true);
+            decimal result = engine.Calculate("round(1.234567)");
+            Assert.AreEqual(Math.Round(1.234567m), result);
+        }
+
+        [TestMethod]
+        public void TestRound2Compiled()
+        {
+            var engine = CreateEngineHelper<decimal>(CultureInfo.InvariantCulture, ExecutionMode.Compiled, true, false, true);
+            decimal result = engine.Calculate("round(1.234567)");
+            Assert.AreEqual(Math.Round(1.234567m), result);
+        }
     }
 }
