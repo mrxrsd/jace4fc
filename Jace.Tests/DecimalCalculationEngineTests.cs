@@ -1340,5 +1340,29 @@ namespace Jace.Tests
 
             Assert.AreEqual(3m, result);
         }
+
+        [TestMethod]
+        public void TestDolarSignVariableCompiled()
+        {
+            var engine = CreateEngineHelper<decimal>(CultureInfo.InvariantCulture, ExecutionMode.Compiled, true, false, true);
+
+            Dictionary<string, decimal> variables = new Dictionary<string, decimal>();
+            variables.Add("$var1", 1);
+
+            decimal result = engine.Calculate("$var1 + 2", variables);
+            Assert.AreEqual(3m, result);
+        }
+
+        [TestMethod]
+        public void TestDolarSignVariableInterpreted()
+        {
+            var engine = CreateEngineHelper<decimal>(CultureInfo.InvariantCulture, ExecutionMode.Interpreted, true, false, true);
+
+            Dictionary<string, decimal> variables = new Dictionary<string, decimal>();
+            variables.Add("$var1", 1);
+
+            decimal result = engine.Calculate("$var1 + 2", variables);
+            Assert.AreEqual(3m, result);
+        }
     }
 }

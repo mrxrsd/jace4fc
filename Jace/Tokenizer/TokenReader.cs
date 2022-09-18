@@ -242,7 +242,7 @@ namespace Jace.Tokenizer
 
         private bool IsPartOfVariable(char character, bool isFirstCharacter)
         {
-            return (character >= 'a' && character <= 'z') || (character >= 'A' && character <= 'Z') || (!isFirstCharacter && character >= '0' && character <= '9') || (!isFirstCharacter && character == '_');
+            return (character == '$') || (character >= 'a' && character <= 'z') || (character >= 'A' && character <= 'Z') || (!isFirstCharacter && character >= '0' && character <= '9') || (!isFirstCharacter && character == '_');
         }
 
         private bool IsUnaryMinus(char currentToken, List<Token> tokens)
