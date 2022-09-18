@@ -459,11 +459,24 @@ namespace Jace.Tests
         [TestMethod]
         public void TestTokenReader19()
         {
-            AssertExtensions.ThrowsException<ParseException>(() =>
-            {
-                var reader = new TokenReader<double>(CultureInfo.InvariantCulture, DoubleNumericalOperations.Instance);
-                List<Token> tokens = reader.Read("$1+$2+$3");
-            });
+            var reader = new TokenReader<double>(CultureInfo.InvariantCulture, DoubleNumericalOperations.Instance);
+            List<Token> tokens = reader.Read("$1+$2+$3");
+
+            Assert.AreEqual(5, tokens.Count);
+
+            Assert.AreEqual("$1", tokens[0].Value);
+            Assert.AreEqual(0, tokens[0].StartPosition);
+            Assert.AreEqual(2, tokens[0].Length);
+
+            Assert.AreEqual("$2", tokens[2].Value);
+            Assert.AreEqual(3, tokens[2].StartPosition);
+            Assert.AreEqual(2, tokens[2].Length);
+
+            Assert.AreEqual("$3", tokens[4].Value);
+            Assert.AreEqual(6, tokens[4].StartPosition);
+            Assert.AreEqual(2, tokens[4].Length);
+
+
         }
 
         [TestMethod]

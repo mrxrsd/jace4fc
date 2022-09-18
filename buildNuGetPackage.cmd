@@ -1,4 +1,4 @@
-SET jaceVersion="1.0.1"
+SET jaceVersion="1.0.2"
 
 FOR /F "tokens=*" %%i IN ('"%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe') do (SET msbuild=%%i)
 

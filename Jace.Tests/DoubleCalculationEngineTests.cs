@@ -664,7 +664,7 @@ namespace Jace.Tests
             variables.Add("var1", 2);
             variables.Add("var2", 4.2);
 
-            double result = engine.Calculate("var1 < var2", variables);
+            double result = engine.Calculate("var1 + 2< var2", variables);
             Assert.AreEqual(1.0, result);
         }
 
@@ -677,7 +677,7 @@ namespace Jace.Tests
             variables.Add("var1", 2);
             variables.Add("var2", 4.2);
 
-            double result = engine.Calculate("var1 < var2", variables);
+            double result = engine.Calculate("var1 + 2< var2", variables);
             Assert.AreEqual(1.0, result);
         }
 
@@ -690,7 +690,7 @@ namespace Jace.Tests
             variables.Add("var1", 2);
             variables.Add("var2", 2);
 
-            double result = engine.Calculate("var1 <= var2", variables);
+            double result = engine.Calculate("var1 + 2<= var2", variables);
             Assert.AreEqual(1.0, result);
         }
 
@@ -703,7 +703,7 @@ namespace Jace.Tests
             variables.Add("var1", 2);
             variables.Add("var2", 2);
 
-            double result = engine.Calculate("var1 <= var2", variables);
+            double result = engine.Calculate("var1 + 2<= var2", variables);
             Assert.AreEqual(1.0, result);
         }
 
@@ -716,7 +716,7 @@ namespace Jace.Tests
             variables.Add("var1", 2);
             variables.Add("var2", 2);
 
-            double result = engine.Calculate("var1 ≤ var2", variables);
+            double result = engine.Calculate("var1 + 2≤ var2", variables);
             Assert.AreEqual(1.0, result);
         }
 
@@ -729,7 +729,7 @@ namespace Jace.Tests
             variables.Add("var1", 2);
             variables.Add("var2", 2);
 
-            double result = engine.Calculate("var1 ≤ var2", variables);
+            double result = engine.Calculate("var1 + 2≤ var2", variables);
             Assert.AreEqual(1.0, result);
         }
 
@@ -742,7 +742,7 @@ namespace Jace.Tests
             variables.Add("var1", 2);
             variables.Add("var2", 3);
 
-            double result = engine.Calculate("var1 > var2", variables);
+            double result = engine.Calculate("var1 + 2> var2", variables);
             Assert.AreEqual(0.0, result);
         }
 
@@ -755,7 +755,7 @@ namespace Jace.Tests
             variables.Add("var1", 2);
             variables.Add("var2", 3);
 
-            double result = engine.Calculate("var1 > var2", variables);
+            double result = engine.Calculate("var1 + 2> var2", variables);
             Assert.AreEqual(0.0, result);
         }
 
@@ -768,7 +768,7 @@ namespace Jace.Tests
             variables.Add("var1", 2);
             variables.Add("var2", 2);
 
-            double result = engine.Calculate("var1 >= var2", variables);
+            double result = engine.Calculate("var1 + 2>= var2", variables);
             Assert.AreEqual(1.0, result);
         }
 
@@ -781,7 +781,7 @@ namespace Jace.Tests
             variables.Add("var1", 2);
             variables.Add("var2", 2);
 
-            double result = engine.Calculate("var1 >= var2", variables);
+            double result = engine.Calculate("var1 + 2>= var2", variables);
             Assert.AreEqual(1.0, result);
         }
 
@@ -794,7 +794,7 @@ namespace Jace.Tests
             variables.Add("var1", 2);
             variables.Add("var2", 2);
 
-            double result = engine.Calculate("var1 != 2", variables);
+            double result = engine.Calculate("var1 + 2!= 2", variables);
             Assert.AreEqual(0.0, result);
         }
 
@@ -807,7 +807,7 @@ namespace Jace.Tests
             variables.Add("var1", 2);
             variables.Add("var2", 2);
 
-            double result = engine.Calculate("var1 ≠ 2", variables);
+            double result = engine.Calculate("var1 + 2≠ 2", variables);
             Assert.AreEqual(0.0, result);
         }
 
@@ -820,7 +820,7 @@ namespace Jace.Tests
             variables.Add("var1", 2);
             variables.Add("var2", 2);
 
-            double result = engine.Calculate("var1 ≠ 2", variables);
+            double result = engine.Calculate("var1 + 2≠ 2", variables);
             Assert.AreEqual(0.0, result);
         }
 
@@ -833,7 +833,7 @@ namespace Jace.Tests
             variables.Add("var1", 2);
             variables.Add("var2", 2);
 
-            double result = engine.Calculate("var1 == 2", variables);
+            double result = engine.Calculate("var1 + 2== 2", variables);
             Assert.AreEqual(1.0, result);
         }
 
@@ -846,7 +846,7 @@ namespace Jace.Tests
             variables.Add("var1", 2);
             variables.Add("var2", 2);
 
-            double result = engine.Calculate("var1 == 2", variables);
+            double result = engine.Calculate("var1 + 2== 2", variables);
             Assert.AreEqual(1.0, result);
         }
 
@@ -1339,6 +1339,62 @@ namespace Jace.Tests
             double result = engine.Calculate("1 + 2.0");
 
             Assert.AreEqual(3, result);
+        }
+
+        [TestMethod]
+        public void TestDolarSignVariableCompiled()
+        {
+            var engine = CreateEngineHelper<double>(CultureInfo.InvariantCulture, ExecutionMode.Compiled, true, false, true);
+            
+            Dictionary<string, double> variables = new Dictionary<string, double>();
+            variables.Add("$var1", 1);
+
+            double result = engine.Calculate("$var1 + 2", variables);
+            Assert.AreEqual(3, result);
+        }
+
+        [TestMethod]
+        public void TestDolarSignVariableInterpreted()
+        {
+            var engine = CreateEngineHelper<double>(CultureInfo.InvariantCulture, ExecutionMode.Interpreted, true, false, true);
+
+            Dictionary<string, double> variables = new Dictionary<string, double>();
+            variables.Add("$var1", 1);
+
+            double result = engine.Calculate("$var1 + 2", variables);
+            Assert.AreEqual(3, result);
+        }
+
+        [TestMethod]
+        public void TestRoundInterpreted()
+        {
+            var engine = CreateEngineHelper<double>(CultureInfo.InvariantCulture, ExecutionMode.Interpreted, true, false, true);
+            double result = engine.Calculate("round(1.234567,2)");
+            Assert.AreEqual(1.23, result);
+        }
+
+        [TestMethod]
+        public void TestRoundCompiled()
+        {
+            var engine = CreateEngineHelper<double>(CultureInfo.InvariantCulture, ExecutionMode.Compiled, true, false, true);
+            double result = engine.Calculate("round(1.234567,2)");
+            Assert.AreEqual(1.23, result);
+        }
+
+        [TestMethod]
+        public void TestRound1Interpreted()
+        {
+            var engine = CreateEngineHelper<double>(CultureInfo.InvariantCulture, ExecutionMode.Interpreted, true, false, true);
+            double result = engine.Calculate("round(1.234567)");
+            Assert.AreEqual(Math.Round(1.234567), result);
+        }
+
+        [TestMethod]
+        public void TestRound2Compiled()
+        {
+            var engine = CreateEngineHelper<double>(CultureInfo.InvariantCulture, ExecutionMode.Compiled, true, false, true);
+            double result = engine.Calculate("round(1.234567)");
+            Assert.AreEqual(Math.Round(1.234567), result);
         }
     }
 }
