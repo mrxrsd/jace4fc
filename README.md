@@ -98,17 +98,17 @@ result = engine.Calculate("1E-3*5+2")
 ```csharp
 
 var vars = new Dictionary<string, double>();
-variables.Add("a", 1.0);
+variables.Add("$a", 1.0);
 variables.Add("B", 2.0);
 variables.Add("c_c", 3.0);
 variables.Add("d1", 3.4);
 variables.Add("VaR_vAr", 10.0);
 
 
-result = engine.Calculate("a + B + c_c + d1 + 10 + VaR_vAr", vars)
+result = engine.Calculate("$a + B + c_c + d1 + 10 + VaR_vAr", vars)
 // 30.0
 ```
-- Can contains letters ( a-z | A-Z ), underscore ( _ )  or a number ( 0-9 ).
+- Can contains letters ( a-z | A-Z ), underscore ( _ ), dolar sign ( $ ) or a number ( 0-9 ).
 - Cannot start with a number.
 - Cannot start with underscore.
 
